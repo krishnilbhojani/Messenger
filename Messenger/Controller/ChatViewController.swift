@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChatViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+class ChatViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITextFieldDelegate{
     
     private let cellId = "MessageCell"
     
@@ -69,9 +69,10 @@ class ChatViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     var messages = [Message]()
     
-    let inputTextField: UITextField = {
+    lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter your message..."
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -212,6 +213,11 @@ class ChatViewController: UICollectionViewController, UICollectionViewDelegateFl
                 self.inputTextField.text = ""
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        handleSend()
+        return true
     }
     
 }
