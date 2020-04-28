@@ -36,9 +36,7 @@ class LoginController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControl.State())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
         button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
-        
         return button
     }()
     
@@ -66,7 +64,7 @@ class LoginController: UIViewController {
             }
             print("logged in")
             self.loadingActivityIndicator.stopLoading()
-            self.messagesController?.fetchUserAndFillDetailsToNavBar()
+            self.messagesController?.checkIfUserIsLoggedIn()
             self.dismiss(animated: true, completion: nil)
         }
     }

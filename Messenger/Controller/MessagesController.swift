@@ -20,15 +20,13 @@ class MessagesController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkIfUserIsLoggedIn()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         let image = UIImage(systemName: "square.and.pencil")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
-        
-        observeMessages()
+        checkIfUserIsLoggedIn()
     }
     
     func setupNavBar(){
@@ -79,15 +77,20 @@ class MessagesController: UITableViewController {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         } else {
             setupNavBar()
+            observeMessages()
         }
     }
     
-    func fetchUserAndFillDetailsToNavBar(){
-        
-    }
-    
     func observeMessages(){
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("uid not found")
+            return
+        }
+        
         db.collection("user-messages").document(uid).addSnapshotListener { (documentSnapshot, error) in
             if let error = error{
                 print(error)
@@ -112,10 +115,10 @@ class MessagesController: UITableViewController {
                                 }
                             }
                         }
+                        self.timer?.invalidate()
+                        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReload), userInfo: nil, repeats: false)
                     }
                 }
-                self.timer?.invalidate()
-                self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReload), userInfo: nil, repeats: false)
             }
         }
     }
@@ -144,11 +147,24 @@ class MessagesController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showChatViewController()
+        if let userId = messages[indexPath.row].chatPartnerId(){
+            db.collection("users").document(userId).getDocument { (documentSnapshot, error) in
+                if let error = error{
+                    print(error)
+                    return
+                }
+                if let data = documentSnapshot?.data(){
+                    let user = User(dictionary: data)
+                    user.id = userId
+                    self.showChatViewController(with: user)
+                }
+            }
+        }
     }
     
-    func showChatViewController(){
+    func showChatViewController(with user: User){
         let chatViewController = ChatViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatViewController.user = user
         navigationController?.pushViewController(chatViewController, animated: true)
     }
     

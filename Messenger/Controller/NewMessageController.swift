@@ -37,6 +37,7 @@ class NewMessageController: UITableViewController {
                 for doc in snapshotDocuments{
                     let data = doc.data()
                     let user = User(dictionary: data)
+                    user.id = doc.documentID
                     self.users.append(user)
                 }
                 DispatchQueue.main.async {
@@ -70,7 +71,8 @@ class NewMessageController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
-            self.messagesController?.showChatViewController()
+            let user = self.users[indexPath.row]
+            self.messagesController?.showChatViewController(with: user)
         }
     }
     

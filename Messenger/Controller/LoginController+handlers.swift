@@ -61,9 +61,9 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 self.loadingActivityIndicator.stopLoading()
                 return
             }
-            print("Uaer Registered into database")
+            print("User Registered into database")
             self.loadingActivityIndicator.stopLoading()
-            self.messagesController?.title = values["name"]
+            self.messagesController?.checkIfUserIsLoggedIn()
             self.dismiss(animated: true, completion: nil)
         }
     }
