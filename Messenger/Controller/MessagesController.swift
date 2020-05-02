@@ -91,41 +91,61 @@ class MessagesController: UITableViewController {
             return
         }
         
-        db.collection("user-messages").document(uid).addSnapshotListener { (documentSnapshot, error) in
+        db.collection("user-messages").document(uid).collection("messages").addSnapshotListener { (querySnapshot, error) in
             if let error = error{
                 print(error)
                 return
             }
-            if let data = documentSnapshot?.data(){
-                for messageDocument in data{
-                    let messageId = messageDocument.key
-                    self.db.collection("messages").document(messageId).addSnapshotListener { (documentSnapshot, error) in
-                        if let error = error{
-                            print(error)
-                            return
+
+            if let snapshotDocuments = querySnapshot?.documents{
+                for doc in snapshotDocuments{
+                    let data = doc.data()
+                    guard let timeStampArray = Array(data.values) as? [Double] else { return }
+                    let sortedArray = timeStampArray.sorted { (t1, t2) -> Bool in
+                        return t1 > t2
+                    }
+                    
+                    for element in data{
+                        if element.value as? Double == sortedArray.first{
+                            let messageId = element.key
+                            self.fetchMessage(with: messageId)
                         }
-                        if let data = documentSnapshot?.data(){
-                            let message = Message(dictionary: data)
-                            if let id = message.chatPartnerId(){
-                                self.messagesDictionary[id] = message
-                                self.messages = Array(self.messagesDictionary.values)
-                                self.messages.sort { (m1, m2) -> Bool in
-                                    guard let t1 = m1.timeStamp?.intValue, let t2 = m2.timeStamp?.intValue else { return false }
-                                    return t1 > t2
-                                }
-                            }
-                        }
-                        self.timer?.invalidate()
-                        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReload), userInfo: nil, repeats: false)
                     }
                 }
             }
         }
     }
     
+    private func fetchMessage(with messageId: String){
+        self.db.collection("messages").document(messageId).addSnapshotListener { (documentSnapshot, error) in
+            if let error = error{
+                print(error)
+                return
+            }
+            if let data = documentSnapshot?.data(){
+                let message = Message(dictionary: data)
+                if let id = message.chatPartnerId(){
+                    self.messagesDictionary[id] = message
+                }
+            }
+            self.attemptReloadOfTable()
+        }
+    }
+    
+    func attemptReloadOfTable(){
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReload), userInfo: nil, repeats: false)
+    }
+    
     var timer: Timer?
     
     @objc func handleReload(){
+        self.messages = Array(self.messagesDictionary.values)
+        self.messages.sort { (m1, m2) -> Bool in
+            guard let t1 = m1.timeStamp?.intValue, let t2 = m2.timeStamp?.intValue else { return false }
+            return t1 > t2
+        }
+        
         DispatchQueue.main.async {
             print("reloaded")
             self.tableView.reloadData()
