@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,7 +18,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene{
             let window = UIWindow(windowScene: windowScene)
             
-            window.rootViewController = UINavigationController(rootViewController: MessagesController())
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            
+            let tutorialScreenViewController = TutorialScreenViewController(collectionViewLayout: layout)
+            let messagesController = MessagesController()
+            
+            var navigationController = UINavigationController()
+            
+            if Auth.auth().currentUser?.uid != nil{
+                navigationController = UINavigationController(rootViewController: messagesController)
+                navigationController.navigationBar.isHidden = false
+            }else{
+                navigationController = UINavigationController(rootViewController: tutorialScreenViewController)
+                navigationController.navigationBar.isHidden = true
+            }
+            
+            window.rootViewController = navigationController
             window.makeKeyAndVisible()
             
             self.window = window

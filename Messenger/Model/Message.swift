@@ -14,12 +14,22 @@ class Message: NSObject{
     var toId: String?
     var fromId: String?
     var timeStamp: NSNumber?
+    var imageUrl: String?
+    var imageWidth: NSNumber?
+    var imageHeight: NSNumber?
+    var videoUrl: String?
     
     init(dictionary: [String: Any]) {
         self.text = dictionary["text"] as? String
         self.toId = dictionary["toId"] as? String
         self.fromId = dictionary["fromId"] as? String
         self.timeStamp = dictionary["timeStamp"] as? NSNumber
+        
+        self.imageUrl = dictionary["imageUrl"] as? String
+        self.imageWidth = dictionary["imageWidth"] as? NSNumber
+        self.imageHeight = dictionary["imageHeight"] as? NSNumber
+        
+        self.videoUrl = dictionary["videoUrl"] as? String
     }
     
     func chatPartnerId() -> String?{

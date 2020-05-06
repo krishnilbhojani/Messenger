@@ -29,6 +29,11 @@ class MessagesController: UITableViewController {
         checkIfUserIsLoggedIn()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     func setupNavBar(){
         let titleView = UIView()
         titleView.backgroundColor = .red
@@ -183,7 +188,7 @@ class MessagesController: UITableViewController {
     }
     
     func showChatViewController(with user: User){
-        let chatViewController = ChatViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let chatViewController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatViewController.user = user
         navigationController?.pushViewController(chatViewController, animated: true)
     }
