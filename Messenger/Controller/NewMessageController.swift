@@ -21,7 +21,11 @@ class NewMessageController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "New Contacts"
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         fetchUser()
     }
@@ -77,6 +81,6 @@ class NewMessageController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        return 80
     }
 }

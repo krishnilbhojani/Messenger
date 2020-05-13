@@ -26,7 +26,13 @@ class UserCell: UITableViewCell {
                         DispatchQueue.main.async {
                             self.titleLabel.text = name
                             self.profileImageView.loadImageUsingCacheWithUrlString(profileImageURL)
-                            self.subtitleLabel.text = self.message?.text
+                            
+                            if self.message?.text == nil{
+                                self.subtitleLabel.text = "sends a media file"
+                            }else{
+                                self.subtitleLabel.text = self.message?.text
+                            }
+                            
                             if let seconds = self.message?.timeStamp?.doubleValue{
                                 let timeStampDate = Date(timeIntervalSince1970: seconds)
                                 let dateFormatter = DateFormatter()
@@ -44,7 +50,7 @@ class UserCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .gray
-        imageView.layer.cornerRadius = 24
+        imageView.layer.cornerRadius = 32
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -58,7 +64,7 @@ class UserCell: UITableViewCell {
     
     let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
+        label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -66,7 +72,7 @@ class UserCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
+        label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,22 +80,24 @@ class UserCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
         setupLayouts()
     }
     
     private func setupLayouts(){
         addSubview(profileImageView)
         
-        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        profileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         
         let headerStack = UIStackView(arrangedSubviews: [titleLabel, timeLabel])
         headerStack.translatesAutoresizingMaskIntoConstraints = false
         
         let labelStackView = UIStackView(arrangedSubviews: [headerStack, subtitleLabel])
         labelStackView.axis = .vertical
+        labelStackView.spacing = 5
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(labelStackView)
         

@@ -14,14 +14,14 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
     func handleRegister() {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
             print("Form is not valid")
-            loadingActivityIndicator.stopLoading()
+            loadingActivityIndicator.stopAnimating()
             return
         }
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error{
                 print(error)
-                self.loadingActivityIndicator.stopLoading()
+                self.loadingActivityIndicator.stopAnimating()
                 return
             }
             print("Registered")
@@ -33,14 +33,14 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                     if let error = error{
                         print(error)
-                        self.loadingActivityIndicator.stopLoading()
+                        self.loadingActivityIndicator.stopAnimating()
                         return
                     }
                     print("Image Uploaded")
                     storageRef.downloadURL { (url, error) in
                         if let error = error{
                             print(error)
-                            self.loadingActivityIndicator.stopLoading()
+                            self.loadingActivityIndicator.stopAnimating()
                             return
                         }
                         print("URL Downloaded")
@@ -58,11 +58,11 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         db.collection("users").document(uid).setData(values) { (error) in
             if let error = error{
                 print(error)
-                self.loadingActivityIndicator.stopLoading()
+                self.loadingActivityIndicator.stopAnimating()
                 return
             }
             print("User Registered into database")
-            self.loadingActivityIndicator.stopLoading()
+            self.loadingActivityIndicator.stopAnimating()
             self.messagesController?.checkIfUserIsLoggedIn()
             self.dismiss(animated: true, completion: nil)
         }

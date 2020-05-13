@@ -13,7 +13,7 @@ class TutorialScreenViewController: UICollectionViewController, UICollectionView
 
     fileprivate let cellId = "TutorialCell"
     
-    let animations = ["analytics", "chart", "completingTasks", "editing", "management", "settings", "task", "working"]
+    let animations = ["chatBubbles", "fastestMessaging"]
     
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()

@@ -24,6 +24,14 @@ class LoginController: UIViewController {
         return view
     }()
     
+    let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "background")
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let loadingActivityIndicator: LoadingIndicatorView = {
         let liv = LoadingIndicatorView()
         return liv
@@ -31,17 +39,19 @@ class LoginController: UIViewController {
     
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        button.backgroundColor = #colorLiteral(red: 0.07410084456, green: 0.6154875159, blue: 0.7212899327, alpha: 1)
         button.setTitle("Register", for: UIControl.State())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControl.State())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         return button
     }()
     
     @objc func handleLoginRegister() {
-        loadingActivityIndicator.startLoading()
+        loadingActivityIndicator.startAnimating()
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
         } else {
@@ -52,18 +62,18 @@ class LoginController: UIViewController {
     func handleLogin() {
         guard let email = emailTextField.text, let password = passwordTextField.text else {
             print("Form is not valid")
-            loadingActivityIndicator.stopLoading()
+            loadingActivityIndicator.stopAnimating()
             return
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error{
                 print(error)
-                self.loadingActivityIndicator.stopLoading()
+                self.loadingActivityIndicator.stopAnimating()
                 return
             }
             print("logged in")
-            self.loadingActivityIndicator.stopLoading()
+            self.loadingActivityIndicator.stopAnimating()
             self.messagesController?.checkIfUserIsLoggedIn()
             self.dismiss(animated: true, completion: nil)
         }
@@ -129,6 +139,7 @@ class LoginController: UIViewController {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         loginRegisterButton.setTitle(title, for: UIControl.State())
         
+        profileImageView.isHidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
         
         inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
         
@@ -151,6 +162,7 @@ class LoginController: UIViewController {
 
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         
+        view.addSubview(backgroundImageView)
         view.addSubview(inputsContainerView)
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
@@ -170,7 +182,7 @@ class LoginController: UIViewController {
         //need x, y, width, height constraints
         loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -12).isActive = true
-        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor, multiplier: 1).isActive = true
+        loginRegisterSegmentedControl.widthAnchor.constraint(equalToConstant: 300).isActive = true
         loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
     
@@ -191,7 +203,7 @@ class LoginController: UIViewController {
         //need x, y, width, height constraints
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50).isActive = true
-        inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        inputsContainerView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
         inputsContainerViewHeightAnchor?.isActive = true
         
@@ -235,6 +247,11 @@ class LoginController: UIViewController {
         passwordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
         passwordTextFieldHeightAnchor?.isActive = true
+        
+        backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func setupLoginRegisterButton() {

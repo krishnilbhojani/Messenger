@@ -21,9 +21,18 @@ class MessagesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        let image = UIImage(systemName: "square.and.pencil")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
+        view.backgroundColor = .white
+        
+        let logoutImage = UIImage(named: "logout")
+        let logoutButton = UIBarButtonItem(image: logoutImage, style: .plain, target: self, action: #selector(handleLogout))
+        logoutButton.tintColor = .black
+        logoutButton.imageInsets = UIEdgeInsets(top: 2, left: 0, bottom: -4, right: -6)
+        navigationItem.leftBarButtonItem = logoutButton
+        
+        let newMessageImage = UIImage(systemName: "square.and.pencil")
+        let newMessageButton = UIBarButtonItem(image: newMessageImage, style: .plain, target: self, action: #selector(handleNewMessage))
+        newMessageButton.tintColor = .black
+        navigationItem.rightBarButtonItem = newMessageButton
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         checkIfUserIsLoggedIn()
@@ -168,7 +177,7 @@ class MessagesController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        return 80
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -85,8 +85,29 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        let videoCallButton = UIBarButtonItem(image: UIImage(systemName: "video.fill"), style: .plain, target: self, action: #selector(handleVideoCall))
+        let voiceCallButton = UIBarButtonItem(image: UIImage(systemName: "phone.fill"), style: .plain, target: self, action: #selector(handleVoiceCall))
+//        let menuButton = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(handleMenu))
+        
+        navigationItem.rightBarButtonItems = [videoCallButton, voiceCallButton]
+        
+        navigationController?.navigationBar.tintColor = .black
+        
         setupCollectionView()
     }
+    
+    @objc func handleVideoCall(){
+        
+    }
+    
+    @objc func handleVoiceCall(){
+        
+    }
+    
+//    @objc func handleMenu(){
+//
+//    }
     
     override var inputAccessoryView: UIView?{
         get{

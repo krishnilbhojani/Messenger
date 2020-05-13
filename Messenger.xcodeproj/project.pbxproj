@@ -23,16 +23,12 @@
 		741412712453956B0059E0A6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741412702453956B0059E0A6 /* Message.swift */; };
 		74141273245435DA0059E0A6 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74141272245435DA0059E0A6 /* ChatLogController.swift */; };
 		74141275245468A30059E0A6 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74141274245468A30059E0A6 /* MessageCell.swift */; };
+		74C5FAE624680AE400C9A3F1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 74C5FAE524680AE300C9A3F1 /* loading.json */; };
+		74C5FAE824680BD400C9A3F1 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5FAE724680BD400C9A3F1 /* LoadingIndicatorView.swift */; };
+		74C5FAEA2468233D00C9A3F1 /* chatBubbles.json in Resources */ = {isa = PBXBuildFile; fileRef = 74C5FAE92468233D00C9A3F1 /* chatBubbles.json */; };
+		74C5FAEC246823BE00C9A3F1 /* fastestMessaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 74C5FAEB246823BE00C9A3F1 /* fastestMessaging.json */; };
 		74E8F801245F12EA00B51A31 /* TutorialScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E8F800245F12EA00B51A31 /* TutorialScreenViewController.swift */; };
 		74E8F80C245F143900B51A31 /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E8F80B245F143900B51A31 /* TutorialCell.swift */; };
-		74E8F811245F245900B51A31 /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F80E245F245400B51A31 /* settings.json */; };
-		74E8F812245F245900B51A31 /* task.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F80F245F245600B51A31 /* task.json */; };
-		74E8F813245F245900B51A31 /* working.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F810245F245900B51A31 /* working.json */; };
-		74E8F819245F248F00B51A31 /* management.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F814245F248500B51A31 /* management.json */; };
-		74E8F81A245F248F00B51A31 /* chart.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F815245F248800B51A31 /* chart.json */; };
-		74E8F81B245F248F00B51A31 /* analytics.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F816245F248A00B51A31 /* analytics.json */; };
-		74E8F81C245F248F00B51A31 /* completingTasks.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F817245F248C00B51A31 /* completingTasks.json */; };
-		74E8F81D245F248F00B51A31 /* editing.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E8F818245F248F00B51A31 /* editing.json */; };
 		AA70265EA6A1F7925951172D /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C59CBEE812151ED6A7860F /* Pods_Messenger.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,16 +53,12 @@
 		741412702453956B0059E0A6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		74141272245435DA0059E0A6 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		74141274245468A30059E0A6 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		74C5FAE524680AE300C9A3F1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		74C5FAE724680BD400C9A3F1 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
+		74C5FAE92468233D00C9A3F1 /* chatBubbles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chatBubbles.json; sourceTree = "<group>"; };
+		74C5FAEB246823BE00C9A3F1 /* fastestMessaging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fastestMessaging.json; sourceTree = "<group>"; };
 		74E8F800245F12EA00B51A31 /* TutorialScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialScreenViewController.swift; sourceTree = "<group>"; };
 		74E8F80B245F143900B51A31 /* TutorialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
-		74E8F80E245F245400B51A31 /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
-		74E8F80F245F245600B51A31 /* task.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = task.json; sourceTree = "<group>"; };
-		74E8F810245F245900B51A31 /* working.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = working.json; sourceTree = "<group>"; };
-		74E8F814245F248500B51A31 /* management.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = management.json; sourceTree = "<group>"; };
-		74E8F815245F248800B51A31 /* chart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chart.json; sourceTree = "<group>"; };
-		74E8F816245F248A00B51A31 /* analytics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = analytics.json; sourceTree = "<group>"; };
-		74E8F817245F248C00B51A31 /* completingTasks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = completingTasks.json; sourceTree = "<group>"; };
-		74E8F818245F248F00B51A31 /* editing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = editing.json; sourceTree = "<group>"; };
 		A998C4364D36675B69DA8086 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +155,7 @@
 				7414126E24538C130059E0A6 /* UserCell.swift */,
 				74E8F80B245F143900B51A31 /* TutorialCell.swift */,
 				74141274245468A30059E0A6 /* MessageCell.swift */,
+				74C5FAE724680BD400C9A3F1 /* LoadingIndicatorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,14 +163,9 @@
 		74E8F80D245F240A00B51A31 /* Animations JSON */ = {
 			isa = PBXGroup;
 			children = (
-				74E8F80E245F245400B51A31 /* settings.json */,
-				74E8F80F245F245600B51A31 /* task.json */,
-				74E8F816245F248A00B51A31 /* analytics.json */,
-				74E8F815245F248800B51A31 /* chart.json */,
-				74E8F817245F248C00B51A31 /* completingTasks.json */,
-				74E8F818245F248F00B51A31 /* editing.json */,
-				74E8F814245F248500B51A31 /* management.json */,
-				74E8F810245F245900B51A31 /* working.json */,
+				74C5FAE524680AE300C9A3F1 /* loading.json */,
+				74C5FAE92468233D00C9A3F1 /* chatBubbles.json */,
+				74C5FAEB246823BE00C9A3F1 /* fastestMessaging.json */,
 			);
 			path = "Animations JSON";
 			sourceTree = "<group>";
@@ -251,17 +239,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74E8F81A245F248F00B51A31 /* chart.json in Resources */,
-				74E8F813245F245900B51A31 /* working.json in Resources */,
 				74141252245359350059E0A6 /* LaunchScreen.storyboard in Resources */,
 				7414125C2453673A0059E0A6 /* GoogleService-Info.plist in Resources */,
-				74E8F81D245F248F00B51A31 /* editing.json in Resources */,
-				74E8F812245F245900B51A31 /* task.json in Resources */,
-				74E8F81C245F248F00B51A31 /* completingTasks.json in Resources */,
-				74E8F819245F248F00B51A31 /* management.json in Resources */,
+				74C5FAE624680AE400C9A3F1 /* loading.json in Resources */,
+				74C5FAEA2468233D00C9A3F1 /* chatBubbles.json in Resources */,
+				74C5FAEC246823BE00C9A3F1 /* fastestMessaging.json in Resources */,
 				7414124F245359350059E0A6 /* Assets.xcassets in Resources */,
-				74E8F811245F245900B51A31 /* settings.json in Resources */,
-				74E8F81B245F248F00B51A31 /* analytics.json in Resources */,
 				7414124D2453592E0059E0A6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +304,7 @@
 				74E8F801245F12EA00B51A31 /* TutorialScreenViewController.swift in Sources */,
 				74141262245368270059E0A6 /* Extensions.swift in Sources */,
 				7414125A245362560059E0A6 /* LoginController.swift in Sources */,
+				74C5FAE824680BD400C9A3F1 /* LoadingIndicatorView.swift in Sources */,
 				74141275245468A30059E0A6 /* MessageCell.swift in Sources */,
 				74E8F80C245F143900B51A31 /* TutorialCell.swift in Sources */,
 				741412462453592E0059E0A6 /* AppDelegate.swift in Sources */,
